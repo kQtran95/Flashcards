@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Flashcards</string>
     <string name="flash_cards">Flash Cards</string>
-    <string name="startButton">Start</string>
+    <string name="nextButton">Next</string>
     <string name="hiragana_a">Hiragana A</string>
     <string name="fast_input_label">Fast Input Label</string>
     <string name="fast_input_settings">Fast Input Settings</string>
