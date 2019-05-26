@@ -4,9 +4,12 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Button
-import android.support.v4.content.ContextCompat
-import android.graphics.drawable.Drawable
-import android.view.View
+import android.util.DisplayMetrics
+import android.view.Menu
+import android.view.MenuInflater
+import android.text.method.TextKeyListener.clear
+import android.view.MenuItem
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +17,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        addListenerOnButton();
+        addListenerOnButton()
+        var paintView = findViewById<PaintView>(R.id.paintView)
+        val metrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(metrics)
+        paintView.init(metrics)
     }
     private fun addListenerOnButton() {
         val button: Button? = findViewById(R.id.startButton)
@@ -38,6 +45,26 @@ class MainActivity : AppCompatActivity() {
                 index = 0
             }
         }
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.normal -> {
+                paintView.normal()
+                return true
+            }
+            R.id.clear -> {
+                paintView.clear()
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }
