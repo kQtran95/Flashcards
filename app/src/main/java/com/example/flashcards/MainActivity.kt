@@ -35,10 +35,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addListenerOnNextButton() {
-        val button: Button? = findViewById(R.id.nextButton)
         val image: ImageView? = findViewById(R.id.hiraganaViewer)
-
         val icons = ArrayList<Int>()
+
         val arr = resources.obtainTypedArray(R.array.hiraganaCharacters)
         (0 until arr.length()).forEach {
             val icon = arr.getResourceId(it, -1)
@@ -46,15 +45,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         val elements = arr.length() - 1
-
         arr.recycle()
-        var list = makeAndShuffleList(elements)
 
-        button?.setOnClickListener {
+        var list = makeAndShuffleList(elements)
+        image?.setImageResource(icons[list.removeAt(0)])
+
+        image?.setOnClickListener {
             if (list.size == 0) {
                 list = makeAndShuffleList(elements)
             }
-            image?.setImageResource(icons[list.removeAt(0)])
+            image.setImageResource(icons[list.removeAt(0)])
+            paintView.clear()
         }
     }
 
