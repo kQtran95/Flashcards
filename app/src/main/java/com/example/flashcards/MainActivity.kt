@@ -10,9 +10,6 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.collections.ArrayList
-import android.graphics.drawable.Drawable
-import com.bumptech.glide.RequestBuilder
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,8 +21,6 @@ class MainActivity : AppCompatActivity() {
         val metrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(metrics)
         paintView.init(metrics)
-//        GlideApp.with(this).load(R.raw.large_giphy_logo).into(giphyLogoView);
-//        val gifItemRequest = GlideApp.with(this).asDrawable()
         addListenerOnClearButton()
     }
 
