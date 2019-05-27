@@ -8,6 +8,7 @@ import android.widget.Button
 import android.util.DisplayMetrics
 import android.view.Menu
 import android.view.MenuItem
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.collections.ArrayList
 
@@ -24,9 +25,6 @@ class MainActivity : AppCompatActivity() {
         addListenerOnClearButton()
     }
 
-    //    fun repopulateRandomList(): List<Int> {
-//
-//    }
     private lateinit var displayArray: TypedArray
     private var menu: Menu? = null
 
@@ -41,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addListenerOnImageViewer() {
         val image: ImageView? = findViewById(R.id.kanaViewer)
+        
         val icons = ArrayList<Int>()
         (0 until displayArray.length()).forEach {
             val icon = displayArray.getResourceId(it, -1)
@@ -53,26 +52,24 @@ class MainActivity : AppCompatActivity() {
         var index = 0
         if (random) {
             var list = makeAndShuffleList(elements)
-            image?.setImageResource(icons[list.removeAt(0)])
-
+            image?.let { Glide.with(this).load(icons[list.removeAt(0)]).into(it) }
             image?.setOnClickListener {
                 if (list.size == 0) {
                     list = makeAndShuffleList(elements)
                 }
-                image.setImageResource(icons[list.removeAt(0)])
+                Glide.with(this).load(icons[icons[list.removeAt(0)]]).into(image)
                 paintView.clear()
 
             }
         } else {
-            image?.setImageResource(icons[index])
-
+            image?.let { Glide.with(this).load(icons[index]).into(it) }
             image?.setOnClickListener {
                 if (index < icons.size - 1) {
                     index++
                 } else {
                     index = 0
                 }
-                image.setImageResource(icons[index])
+                Glide.with(this).load(icons[index]).into(image)
                 paintView.clear()
             }
         }
@@ -85,28 +82,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun displayHiraganaCharacters() {
-        displayArray = resources.obtainTypedArray(R.array.hiragana_characters)
-    }
-
-    fun displayHiraganaCharactersStrokes() {
-        displayArray = resources.obtainTypedArray(R.array.hiragana_characters_stroke)
-    }
-
-    fun displayHiraganaCharactersGifs() {
-        displayArray = resources.obtainTypedArray(R.array.hiragana_characters_stroke_gif)
-    }
-
-    fun displayKatakanaCharacters() {
-        displayArray = resources.obtainTypedArray(R.array.katakana_characters)
-    }
-
-    fun displayKatakanaCharactersStrokes() {
-        displayArray = resources.obtainTypedArray(R.array.katakana_characters_stroke)
-    }
-
-    fun displayKatakanaCharactersGifs() {
-        displayArray = resources.obtainTypedArray(R.array.katakana_characters_stroke_gif)
+    private fun displayArray(arrayLocation: Int) {
+        displayArray = resources.obtainTypedArray(arrayLocation)
+        addListenerOnImageViewer()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -124,33 +102,27 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.hiraganaCharacter -> {
-                displayHiraganaCharacters()
-                addListenerOnImageViewer()
+                displayArray(R.array.hiragana_characters)
                 return true
             }
             R.id.hiraganaCharacterStrokes -> {
-                displayHiraganaCharactersStrokes()
-                addListenerOnImageViewer()
+                displayArray(R.array.hiragana_characters_stroke)
                 return true
             }
             R.id.hiraganaCharacterGifs -> {
-                displayHiraganaCharactersGifs()
-                addListenerOnImageViewer()
+                displayArray(R.array.hiragana_characters_stroke_gif)
                 return true
             }
             R.id.katakanaCharacter -> {
-                displayKatakanaCharacters()
-                addListenerOnImageViewer()
+                displayArray(R.array.katakana_characters)
                 return true
             }
             R.id.katakanaCharacterStrokes -> {
-                displayKatakanaCharactersStrokes()
-                addListenerOnImageViewer()
+                displayArray(R.array.katakana_characters_stroke)
                 return true
             }
             R.id.katakanaCharacterGifs -> {
-                displayKatakanaCharactersGifs()
-                addListenerOnImageViewer()
+                displayArray(R.array.katakana_characters_stroke_gif)
                 return true
             }
         }
