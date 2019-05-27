@@ -46,16 +46,31 @@ class MainActivity : AppCompatActivity() {
 
         val elements = arr.length() - 1
         arr.recycle()
+        var random = false
+        var index = 0
+        if (random) {
+            var list = makeAndShuffleList(elements)
+            image?.setImageResource(icons[list.removeAt(0)])
 
-        var list = makeAndShuffleList(elements)
-        image?.setImageResource(icons[list.removeAt(0)])
+            image?.setOnClickListener {
+                if (list.size == 0) {
+                    list = makeAndShuffleList(elements)
+                }
+                image.setImageResource(icons[list.removeAt(0)])
+                paintView.clear()
 
-        image?.setOnClickListener {
-            if (list.size == 0) {
-                list = makeAndShuffleList(elements)
             }
-            image.setImageResource(icons[list.removeAt(0)])
-            paintView.clear()
+        } else {
+            image?.setImageResource(icons[index])
+
+            image?.setOnClickListener {
+                if (index < icons.size - 1) {
+                    index++
+                } else {
+                    index = 0
+                }
+                image.setImageResource(icons[index])
+            }
         }
     }
 
