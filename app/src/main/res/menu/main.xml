@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:id="@+id/normal"
-	      android:title="@string/clear"
-	      app:showAsAction="ifRoom"/>
-	<item android:id="@+id/clear"
-	      android:title="@string/clear" />
+	<item android:id="@+id/hiraganaCharacter"
+	      android:title="@string/hiraganaCharacter"
+	      app:showAsAction="withText"/>
+	<item android:id="@+id/hiraganaCharacterGifs"
+	      android:title="@string/hiraganaCharacterGifs"
+	      app:showAsAction="withText"/>
+	<item android:id="@+id/hiraganaCharacterStrokes"
+	      android:title="@string/hiraganaCharacterStrokes"
+	      app:showAsAction="withText"/>
+	<item android:id="@+id/katakanaCharacter"
+	      android:title="@string/katakanaCharacter"
+	      app:showAsAction="withText"/>
+	<item android:id="@+id/katakanaCharacterGifs"
+	      android:title="@string/katakanaCharacterGifs"
+	      app:showAsAction="withText"/>
+	<item android:id="@+id/katakanaCharacterStrokes"
+	      android:title="@string/katakanaCharacterStrokes"
+	      app:showAsAction="withText"/>
 </menu>
