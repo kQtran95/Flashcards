@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         val image: ImageView? = findViewById(R.id.hiraganaViewer)
         val icons = ArrayList<Int>()
 
-        val arr = resources.obtainTypedArray(R.array.hiraganaCharacters)
+        val arr = resources.obtainTypedArray(R.array.hiragana_full_Characters)
         (0 until arr.length()).forEach {
             val icon = arr.getResourceId(it, -1)
             icons.add(icon)
