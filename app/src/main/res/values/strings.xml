@@ -2,6 +2,14 @@
     <string name="app_name">Flashcards</string>
     <string name="flash_cards">Flash Cards</string>
     <string name="clear">clear</string>
+    <string name="hiraganaCharacter">Hiragana Characters</string>
+    <string name="hiraganaCharacterGifs">Hiragana Characters Strokes Gifs</string>
+    <string name="hiraganaCharacterStrokes">Hiragana Characters Strokes</string>
+    <string name="katakanaCharacter">Katakana Characters</string>
+    <string name="katakanaCharacterGifs">Katakana Characters Strokes Gifs</string>
+    <string name="katakanaCharacterStrokes">Katakana Characters Strokes</string>
+    <string name="select_array">Select Array</string>
+    <string name="viewer_for_pngs">Viewer for pngs</string>
     <array name="hiragana_full_Characters">
         <item>@drawable/full_hiragana_a</item>
         <item>@drawable/full_hiragana_ka</item>

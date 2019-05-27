@@ -12,7 +12,7 @@
                 android:layout_width="fill_parent"
                 android:adjustViewBounds="true"
                 android:layout_height="wrap_content"
-                android:id="@+id/hiraganaViewer"/>
+                android:id="@+id/kanaViewer" android:contentDescription="@string/viewer_for_pngs"/>
         <Button
                 android:text="@string/clear"
                 android:layout_width="88dp"
