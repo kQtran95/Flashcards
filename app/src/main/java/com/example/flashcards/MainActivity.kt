@@ -23,10 +23,15 @@ class MainActivity : AppCompatActivity() {
 	private var gestureDetectorCompat: GestureDetectorCompat? = null
 	private var displayArray: TypedArray? = null
 	private var romanjiArray: Array<String>? = null
+	private val icons = ArrayList<Int>()
 	private var menu: Menu? = null
-	var index = 0
-	var strings = false
-	val total = 47
+	private val romanji = 0
+	private val hiragana = 1
+	private val katakana = 2
+	private var currentView: Int = -1
+	private var index = 0
+	private var strings = false
+	private val total = 47
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -59,44 +64,6 @@ class MainActivity : AppCompatActivity() {
 		val textView: TextView? = findViewById(R.id.romanjiViewer)
 		textView!!.text = message
 	}
-
-//	private fun addListenerOnImageViewer() {
-//		val image: ImageView? = findViewById(R.id.kanaViewer)
-//
-//		val icons = ArrayList<Int>()
-//		(0 until displayArray.length()).forEach {
-//			val icon = displayArray.getResourceId(it, -1)
-//			icons.add(icon)
-//		}
-//
-//		val elements = displayArray.length() - 1
-//		displayArray.recycle()
-//		var random = false
-//		var index = 0
-//		if (random) {
-//			var list = makeAndShuffleList(elements)
-//			image?.let { Glide.with(this).load(icons[list.removeAt(0)]).into(it) }
-//			image?.setOnClickListener {
-//				if (list.size == 0) {
-//					list = makeAndShuffleList(elements)
-//				}
-//				Glide.with(this).load(icons[icons[list.removeAt(0)]]).into(image)
-//				paintView.clear()
-//
-//			}
-//		} else {
-//			image?.let { Glide.with(this).load(icons[index]).into(it) }
-//			image?.setOnClickListener {
-//				if (index < icons.size - 1) {
-//					index++
-//				} else {
-//					index = 0
-//				}
-//				Glide.with(this).load(icons[index]).into(image)
-//				paintView.clear()
-//			}
-//		}
-//	}
 	
 	fun rightSwipe() {
 		if (index == total)
@@ -110,21 +77,72 @@ class MainActivity : AppCompatActivity() {
 		if (strings) nextCharacter(--index) else nextImage(--index)
 	}
 	
+	fun upSwipe() {
+		if (currentView == romanji || currentView == katakana) {
+			displayArray = resources.obtainTypedArray(R.array.hiragana_characters)
+			displayKana()
+		} else if (currentView == hiragana) {
+			displayArray = resources.obtainTypedArray(R.array.katakana_characters)
+			displayKana()
+		}
+	}
+	
+	fun downSwipe() {
+		if (currentView == romanji || currentView == hiragana) {
+			displayArray = resources.obtainTypedArray(R.array.katakana_characters)
+			displayKana()
+		} else if (currentView == katakana) {
+			displayArray = resources.obtainTypedArray(R.array.hiragana_characters)
+			displayKana()
+		}
+	}
+	
+	fun oneTap() {
+		//TODO back to original view
+		val image: ImageView? = findViewById(R.id.kanaViewer)
+		val textView: TextView? = findViewById(R.id.romanjiViewer)
+		
+		if (currentView == romanji) {
+			image!!.visibility = View.GONE
+			textView!!.visibility = View.VISIBLE
+		} else if (currentView == katakana || currentView == hiragana) {
+			textView!!.visibility = View.VISIBLE
+			image!!.visibility = View.GONE
+		}
+	}
+	
+	fun twoTap() {
+		//TODO display hiragana gif then katakana gif
+	}
+	
+	fun displayKana() {
+		val image: ImageView? = findViewById(R.id.kanaViewer)
+		image!!.visibility = View.VISIBLE
+		
+		if (currentView == romanji) {
+			val textView: TextView? = findViewById(R.id.romanjiViewer)
+			textView!!.visibility = View.GONE
+		}
+		
+		val array = ArrayList<Int>()
+		if (displayArray != null) {
+			(0 until displayArray!!.length()).forEach {
+				val icon = displayArray!!.getResourceId(it, -1)
+				array.add(icon)
+			}
+		}
+		image.let { Glide.with(this).load(array[index]).into(it) }
+	}
+	
 	fun nextImage(index: Int) {
 		val textView: TextView? = findViewById(R.id.romanjiViewer)
 		textView!!.visibility = View.GONE
 		
 		val image: ImageView? = findViewById(R.id.kanaViewer)
 		image!!.visibility = View.VISIBLE
-		val icons = ArrayList<Int>()
-		if (displayArray != null) {
-			(0 until displayArray!!.length()).forEach {
-				val icon = displayArray!!.getResourceId(it, -1)
-				icons.add(icon)
-			}
-			image.let { Glide.with(this).load(icons[index]).into(it) }
-			paintView.clear()
-		}
+		
+		image.let { Glide.with(this).load(icons[index]).into(it) }
+		paintView.clear()
 	}
 	
 	fun nextCharacter(index: Int) {
@@ -137,45 +155,6 @@ class MainActivity : AppCompatActivity() {
 		textView.text = (romanjiArray as Array<String>)[index]
 		paintView.clear()
 	}
-
-//	fun addListenerOnTextViewer() {
-//		val textView: TextView? = findViewById(R.id.romanjiViewer)
-//		val textArray = ArrayList<String>()
-//		(0 until romanjiArray.size).forEach {
-//			val romanji = romanjiArray[it]
-//			textArray.add(romanji)
-//		}
-//
-//		val elements = textArray.size - 1
-//		var random = false
-//		var index = 0
-//		if (random) {
-//			var list = makeAndShuffleList(elements)
-//			textView?.text = textArray[list[index]]
-//			textView?.setOnClickListener {
-//				if (index < textArray.size - 1) {
-//					index++
-//				} else {
-//					list = makeAndShuffleList(elements)
-//					index = 0
-//				}
-//				textView.text = textArray[list[index]]
-//				paintView.clear()
-//
-//			}
-//		} else {
-//			textView?.text = textArray[index]
-//			textView?.setOnClickListener {
-//				if (index < textArray.size - 1) {
-//					index++
-//				} else {
-//					index = 0
-//				}
-//				textView.text = textArray[index]
-//				paintView.clear()
-//			}
-//		}
-//	}
 	
 	private fun addListenerOnClearButton() {
 		val button: Button? = findViewById(R.id.clearButton)
@@ -186,6 +165,12 @@ class MainActivity : AppCompatActivity() {
 	
 	private fun displayImageArray(arrayLocation: Int) {
 		displayArray = resources.obtainTypedArray(arrayLocation)
+		if (displayArray != null) {
+			(0 until displayArray!!.length()).forEach {
+				val icon = displayArray!!.getResourceId(it, -1)
+				icons.add(icon)
+			}
+		}
 		nextImage(0)
 	}
 	
@@ -195,11 +180,6 @@ class MainActivity : AppCompatActivity() {
 		this.menu = menu
 		return super.onCreateOptionsMenu(menu)
 	}
-
-//    fun updateMenuTitles() {
-//        val bedMenuItem = menu?.findItem(R.id.hiraganaCharacter)
-//
-//    }
 	
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		index = 0
@@ -207,10 +187,12 @@ class MainActivity : AppCompatActivity() {
 		when (item.itemId) {
 			R.id.romanjiCharacter -> {
 				strings = true
+				currentView = romanji
 				nextCharacter(0)
 				return true
 			}
 			R.id.hiraganaCharacter -> {
+				currentView = hiragana
 				displayImageArray(R.array.hiragana_characters)
 				return true
 			}
@@ -223,6 +205,7 @@ class MainActivity : AppCompatActivity() {
 				return true
 			}
 			R.id.katakanaCharacter -> {
+				currentView = katakana
 				displayImageArray(R.array.katakana_characters)
 				return true
 			}

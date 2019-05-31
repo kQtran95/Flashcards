@@ -29,17 +29,17 @@ class CustomGestureListener : GestureDetector.SimpleOnGestureListener() {
 		// Only when swipe distance between minimal and maximal distance value then we treat it as effective swipe
 		if (deltaXAbs in 100.0..1000.0) {
 			if (deltaX > 0) {
-				this.activity!!.leftSwipe()
-			} else {
 				this.activity!!.rightSwipe()
+			} else {
+				this.activity!!.leftSwipe()
 			}
 		}
 		
-		if (deltaYAbs in 100.0..1000.0) {
+		if (deltaYAbs in 200.0..1000.0) {
 			if (deltaY > 0) {
-//				this.activity!!.displayMessage("Swipe to up")
+				this.activity!!.upSwipe()
 			} else {
-//				this.activity!!.displayMessage("Swipe to down")
+				this.activity!!.downSwipe()
 			}
 		}
 		
@@ -48,7 +48,8 @@ class CustomGestureListener : GestureDetector.SimpleOnGestureListener() {
 	
 	// Invoked when single tap screen.
 	override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-		this.activity!!.displayMessage("Single tap occurred.")
+//		this.activity!!.displayMessage("Single tap occurred.")
+		this.activity!!.oneTap()
 		return true
 	}
 	
