@@ -3,17 +3,27 @@ package com.example.flashcards
 import android.content.res.TypedArray
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.view.GestureDetectorCompat
 import android.widget.ImageView
 import android.widget.Button
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
+	
+	private var gestureDetectorCompat: GestureDetectorCompat? = null
+	private lateinit var displayArray: TypedArray
+	private lateinit var romanjiArray: Array<String>
+	private var menu: Menu? = null
+	var index = 0
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -22,11 +32,11 @@ class MainActivity : AppCompatActivity() {
 		val metrics = DisplayMetrics()
 		windowManager.defaultDisplay.getMetrics(metrics)
 		paintView.init(metrics)
+		val gestureListener = CustomGestureListener()
+		gestureListener.setActivity(this)
+		gestureDetectorCompat = GestureDetectorCompat(this, gestureListener)
 		addListenerOnClearButton()
 	}
-	
-	private lateinit var displayArray: TypedArray
-	private var menu: Menu? = null
 	
 	private fun makeAndShuffleList(elements: Int): ArrayList<Int> {
 		val list = ArrayList<Int>()
@@ -35,6 +45,16 @@ class MainActivity : AppCompatActivity() {
 		}
 		list.shuffle()
 		return list
+	}
+	
+	override fun onTouchEvent(event: MotionEvent): Boolean {
+		gestureDetectorCompat!!.onTouchEvent(event)
+		return true
+	}
+	
+	fun displayMessage(message: String) {
+		val textView: TextView? = findViewById(R.id.romanjiViewer)
+			textView!!.text = message
 	}
 	
 	private fun addListenerOnImageViewer() {
@@ -75,6 +95,51 @@ class MainActivity : AppCompatActivity() {
 		}
 	}
 	
+	fun nextCharacter(index: Int) {
+		val textView: TextView? = findViewById(R.id.romanjiViewer)
+		romanjiArray = resources.getStringArray(R.array.characters_romanji)
+		textView?.text = romanjiArray[index]
+	}
+	
+	fun addListenerOnTextViewer() {
+		val textView: TextView? = findViewById(R.id.romanjiViewer)
+		val textArray = ArrayList<String>()
+		(0 until romanjiArray.size).forEach {
+			val romanji = romanjiArray[it]
+			textArray.add(romanji)
+		}
+		
+		val elements = textArray.size - 1
+		var random = false
+		var index = 0
+		if (random) {
+			var list = makeAndShuffleList(elements)
+			textView?.text = textArray[list[index]]
+			textView?.setOnClickListener {
+				if (index < textArray.size - 1) {
+					index++
+				} else {
+					list = makeAndShuffleList(elements)
+					index = 0
+				}
+				textView.text = textArray[list[index]]
+				paintView.clear()
+				
+			}
+		} else {
+			textView?.text = textArray[index]
+			textView?.setOnClickListener {
+				if (index < textArray.size - 1) {
+					index++
+				} else {
+					index = 0
+				}
+				textView.text = textArray[index]
+				paintView.clear()
+			}
+		}
+	}
+	
 	private fun addListenerOnClearButton() {
 		val button: Button? = findViewById(R.id.clearButton)
 		button?.setOnClickListener {
@@ -82,9 +147,14 @@ class MainActivity : AppCompatActivity() {
 		}
 	}
 	
-	private fun displayArray(arrayLocation: Int) {
+	private fun displayImageArray(arrayLocation: Int) {
 		displayArray = resources.obtainTypedArray(arrayLocation)
 		addListenerOnImageViewer()
+	}
+	
+	private fun displayTextArray(arrayLocation: Int) {
+		romanjiArray = resources.getStringArray(arrayLocation)
+//		addListenerOnTextViewer()
 	}
 	
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -101,28 +171,32 @@ class MainActivity : AppCompatActivity() {
 	
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		when (item.itemId) {
+			R.id.romanjiCharacter -> {
+				displayTextArray(R.array.characters_romanji)
+				return true
+			}
 			R.id.hiraganaCharacter -> {
-				displayArray(R.array.hiragana_characters)
+				displayImageArray(R.array.hiragana_characters)
 				return true
 			}
 			R.id.hiraganaCharacterStrokes -> {
-				displayArray(R.array.hiragana_characters_stroke)
+				displayImageArray(R.array.hiragana_characters_stroke)
 				return true
 			}
 			R.id.hiraganaCharacterGifs -> {
-				displayArray(R.array.hiragana_characters_stroke_gif)
+				displayImageArray(R.array.hiragana_characters_stroke_gif)
 				return true
 			}
 			R.id.katakanaCharacter -> {
-				displayArray(R.array.katakana_characters)
+				displayImageArray(R.array.katakana_characters)
 				return true
 			}
 			R.id.katakanaCharacterStrokes -> {
-				displayArray(R.array.katakana_characters_stroke)
+				displayImageArray(R.array.katakana_characters_stroke)
 				return true
 			}
 			R.id.katakanaCharacterGifs -> {
-				displayArray(R.array.katakana_characters_stroke_gif)
+				displayImageArray(R.array.katakana_characters_stroke_gif)
 				return true
 			}
 		}

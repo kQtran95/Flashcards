@@ -14,6 +14,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/kanaViewer"
                 android:contentDescription="@string/viewer_for_pngs"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/romanjiViewer"
+                android:textSize="50sp"
+                android:gravity="center"/>
         <Button
                 android:text="@string/clear"
                 android:layout_width="88dp"
