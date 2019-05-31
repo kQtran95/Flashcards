@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
+import android.view.View
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,10 +21,12 @@ import kotlin.collections.ArrayList
 class MainActivity : AppCompatActivity() {
 	
 	private var gestureDetectorCompat: GestureDetectorCompat? = null
-	private lateinit var displayArray: TypedArray
-	private lateinit var romanjiArray: Array<String>
+	private var displayArray: TypedArray? = null
+	private var romanjiArray: Array<String>? = null
 	private var menu: Menu? = null
 	var index = 0
+	var strings = false
+	val total = 47
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -54,91 +57,125 @@ class MainActivity : AppCompatActivity() {
 	
 	fun displayMessage(message: String) {
 		val textView: TextView? = findViewById(R.id.romanjiViewer)
-			textView!!.text = message
+		textView!!.text = message
+	}
+
+//	private fun addListenerOnImageViewer() {
+//		val image: ImageView? = findViewById(R.id.kanaViewer)
+//
+//		val icons = ArrayList<Int>()
+//		(0 until displayArray.length()).forEach {
+//			val icon = displayArray.getResourceId(it, -1)
+//			icons.add(icon)
+//		}
+//
+//		val elements = displayArray.length() - 1
+//		displayArray.recycle()
+//		var random = false
+//		var index = 0
+//		if (random) {
+//			var list = makeAndShuffleList(elements)
+//			image?.let { Glide.with(this).load(icons[list.removeAt(0)]).into(it) }
+//			image?.setOnClickListener {
+//				if (list.size == 0) {
+//					list = makeAndShuffleList(elements)
+//				}
+//				Glide.with(this).load(icons[icons[list.removeAt(0)]]).into(image)
+//				paintView.clear()
+//
+//			}
+//		} else {
+//			image?.let { Glide.with(this).load(icons[index]).into(it) }
+//			image?.setOnClickListener {
+//				if (index < icons.size - 1) {
+//					index++
+//				} else {
+//					index = 0
+//				}
+//				Glide.with(this).load(icons[index]).into(image)
+//				paintView.clear()
+//			}
+//		}
+//	}
+	
+	fun rightSwipe() {
+		if (index == total)
+			index = -1
+		if (strings) nextCharacter(++index) else nextImage(++index)
 	}
 	
-	private fun addListenerOnImageViewer() {
+	fun leftSwipe() {
+		if (index == 0)
+			index = total + 1
+		if (strings) nextCharacter(--index) else nextImage(--index)
+	}
+	
+	fun nextImage(index: Int) {
+		val textView: TextView? = findViewById(R.id.romanjiViewer)
+		textView!!.visibility = View.GONE
+		
 		val image: ImageView? = findViewById(R.id.kanaViewer)
-		
+		image!!.visibility = View.VISIBLE
 		val icons = ArrayList<Int>()
-		(0 until displayArray.length()).forEach {
-			val icon = displayArray.getResourceId(it, -1)
-			icons.add(icon)
-		}
-		
-		val elements = displayArray.length() - 1
-		displayArray.recycle()
-		var random = false
-		var index = 0
-		if (random) {
-			var list = makeAndShuffleList(elements)
-			image?.let { Glide.with(this).load(icons[list.removeAt(0)]).into(it) }
-			image?.setOnClickListener {
-				if (list.size == 0) {
-					list = makeAndShuffleList(elements)
-				}
-				Glide.with(this).load(icons[icons[list.removeAt(0)]]).into(image)
-				paintView.clear()
-				
+		if (displayArray != null) {
+			(0 until displayArray!!.length()).forEach {
+				val icon = displayArray!!.getResourceId(it, -1)
+				icons.add(icon)
 			}
-		} else {
 			image?.let { Glide.with(this).load(icons[index]).into(it) }
-			image?.setOnClickListener {
-				if (index < icons.size - 1) {
-					index++
-				} else {
-					index = 0
-				}
-				Glide.with(this).load(icons[index]).into(image)
-				paintView.clear()
-			}
+			paintView.clear()
 		}
 	}
 	
 	fun nextCharacter(index: Int) {
-		val textView: TextView? = findViewById(R.id.romanjiViewer)
-		romanjiArray = resources.getStringArray(R.array.characters_romanji)
-		textView?.text = romanjiArray[index]
-	}
-	
-	fun addListenerOnTextViewer() {
-		val textView: TextView? = findViewById(R.id.romanjiViewer)
-		val textArray = ArrayList<String>()
-		(0 until romanjiArray.size).forEach {
-			val romanji = romanjiArray[it]
-			textArray.add(romanji)
-		}
+		val image: ImageView? = findViewById(R.id.kanaViewer)
+		image!!.visibility = View.GONE
 		
-		val elements = textArray.size - 1
-		var random = false
-		var index = 0
-		if (random) {
-			var list = makeAndShuffleList(elements)
-			textView?.text = textArray[list[index]]
-			textView?.setOnClickListener {
-				if (index < textArray.size - 1) {
-					index++
-				} else {
-					list = makeAndShuffleList(elements)
-					index = 0
-				}
-				textView.text = textArray[list[index]]
-				paintView.clear()
-				
-			}
-		} else {
-			textView?.text = textArray[index]
-			textView?.setOnClickListener {
-				if (index < textArray.size - 1) {
-					index++
-				} else {
-					index = 0
-				}
-				textView.text = textArray[index]
-				paintView.clear()
-			}
-		}
+		val textView: TextView? = findViewById(R.id.romanjiViewer)
+		textView!!.visibility = View.VISIBLE
+		romanjiArray = resources.getStringArray(R.array.characters_romanji)
+		textView?.text = (romanjiArray as Array<String>)[index]
+		paintView.clear()
 	}
+
+//	fun addListenerOnTextViewer() {
+//		val textView: TextView? = findViewById(R.id.romanjiViewer)
+//		val textArray = ArrayList<String>()
+//		(0 until romanjiArray.size).forEach {
+//			val romanji = romanjiArray[it]
+//			textArray.add(romanji)
+//		}
+//
+//		val elements = textArray.size - 1
+//		var random = false
+//		var index = 0
+//		if (random) {
+//			var list = makeAndShuffleList(elements)
+//			textView?.text = textArray[list[index]]
+//			textView?.setOnClickListener {
+//				if (index < textArray.size - 1) {
+//					index++
+//				} else {
+//					list = makeAndShuffleList(elements)
+//					index = 0
+//				}
+//				textView.text = textArray[list[index]]
+//				paintView.clear()
+//
+//			}
+//		} else {
+//			textView?.text = textArray[index]
+//			textView?.setOnClickListener {
+//				if (index < textArray.size - 1) {
+//					index++
+//				} else {
+//					index = 0
+//				}
+//				textView.text = textArray[index]
+//				paintView.clear()
+//			}
+//		}
+//	}
 	
 	private fun addListenerOnClearButton() {
 		val button: Button? = findViewById(R.id.clearButton)
@@ -149,12 +186,7 @@ class MainActivity : AppCompatActivity() {
 	
 	private fun displayImageArray(arrayLocation: Int) {
 		displayArray = resources.obtainTypedArray(arrayLocation)
-		addListenerOnImageViewer()
-	}
-	
-	private fun displayTextArray(arrayLocation: Int) {
-		romanjiArray = resources.getStringArray(arrayLocation)
-//		addListenerOnTextViewer()
+		nextImage(0)
 	}
 	
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -170,9 +202,12 @@ class MainActivity : AppCompatActivity() {
 //    }
 	
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+		index = 0
+		strings = false
 		when (item.itemId) {
 			R.id.romanjiCharacter -> {
-				displayTextArray(R.array.characters_romanji)
+				strings = true
+				nextCharacter(0)
 				return true
 			}
 			R.id.hiraganaCharacter -> {

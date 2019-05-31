@@ -8,6 +8,7 @@ class CustomGestureListener : GestureDetector.SimpleOnGestureListener() {
 	
 	// Source activity that display message in text view.
 	private var activity: MainActivity? = null
+	var index = 0
 	
 	fun setActivity(activity: MainActivity) {
 		this.activity = activity
@@ -15,7 +16,6 @@ class CustomGestureListener : GestureDetector.SimpleOnGestureListener() {
 	
 	/* This method is invoked when a swipe gesture happened. */
 	override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
-		
 		// Get swipe delta value in x axis.
 		val deltaX = e1.x - e2.x
 		
@@ -29,22 +29,20 @@ class CustomGestureListener : GestureDetector.SimpleOnGestureListener() {
 		// Only when swipe distance between minimal and maximal distance value then we treat it as effective swipe
 		if (deltaXAbs in 100.0..1000.0) {
 			if (deltaX > 0) {
-				this.activity!!.displayMessage("Swipe to left")
-				this.activity!!.nextCharacter(0)
+				this.activity!!.leftSwipe()
 			} else {
-				this.activity!!.displayMessage("Swipe to right")
-				this.activity!!.nextCharacter(1)
+				this.activity!!.rightSwipe()
 			}
 		}
 		
 		if (deltaYAbs in 100.0..1000.0) {
 			if (deltaY > 0) {
-				this.activity!!.displayMessage("Swipe to up")
+//				this.activity!!.displayMessage("Swipe to up")
 			} else {
-				this.activity!!.displayMessage("Swipe to down")
+//				this.activity!!.displayMessage("Swipe to down")
 			}
 		}
-				
+		
 		return true
 	}
 	
