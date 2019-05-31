@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 				val icon = displayArray!!.getResourceId(it, -1)
 				icons.add(icon)
 			}
-			image?.let { Glide.with(this).load(icons[index]).into(it) }
+			image.let { Glide.with(this).load(icons[index]).into(it) }
 			paintView.clear()
 		}
 	}
@@ -134,7 +134,7 @@ class MainActivity : AppCompatActivity() {
 		val textView: TextView? = findViewById(R.id.romanjiViewer)
 		textView!!.visibility = View.VISIBLE
 		romanjiArray = resources.getStringArray(R.array.characters_romanji)
-		textView?.text = (romanjiArray as Array<String>)[index]
+		textView.text = (romanjiArray as Array<String>)[index]
 		paintView.clear()
 	}
 

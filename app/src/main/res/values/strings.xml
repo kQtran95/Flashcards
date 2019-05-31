@@ -168,28 +168,28 @@
 		<item name="romanji_we">WE</item>
 	</string-array>
 	<array name="hiragana_characters">
-		<item>@drawable/ic_hiragana_a</item>
-		<item>@drawable/ic_hiragana_ka</item>
-		<item>@drawable/ic_hiragana_sa</item>
+		<item>@drawable/hiragana_a</item>
+		<item>@drawable/hiragana_ka</item>
+		<item>@drawable/hiragana_sa</item>
 		<item>@drawable/hiragana_ta</item>
 		<item>@drawable/hiragana_na</item>
 		<item>@drawable/hiragana_ha</item>
-		<item>@drawable/ic_hiragana_ma</item>
+		<item>@drawable/hiragana_ma</item>
 		<item>@drawable/hiragana_ya</item>
 		<item>@drawable/hiragana_ra</item>
 		<item>@drawable/hiragana_wa</item>
 		<item>@drawable/hiragana_n</item>
 		<item>@drawable/hiragana_i</item>
-		<item>@drawable/ic_hiragana_ki</item>
-		<item>@drawable/ic_hiragana_shi</item>
+		<item>@drawable/hiragana_ki</item>
+		<item>@drawable/hiragana_shi</item>
 		<item>@drawable/hiragana_chi</item>
 		<item>@drawable/hiragana_ni</item>
-		<item>@drawable/ic_hiragana_hi</item>
+		<item>@drawable/hiragana_hi</item>
 		<item>@drawable/hiragana_mi</item>
 		<item>@drawable/hiragana_ri</item>
 		<item>@drawable/hiragana_u</item>
-		<item>@drawable/ic_hiragana_ku</item>
-		<item>@drawable/ic_hiragana_su</item>
+		<item>@drawable/hiragana_ku</item>
+		<item>@drawable/hiragana_su</item>
 		<item>@drawable/hiragana_tsu</item>
 		<item>@drawable/hiragana_nu</item>
 		<item>@drawable/hiragana_fu</item>
@@ -198,7 +198,7 @@
 		<item>@drawable/hiragana_ru</item>
 		<item>@drawable/hiragana_e</item>
 		<item>@drawable/hiragana_ke</item>
-		<item>@drawable/ic_hiragana_se</item>
+		<item>@drawable/hiragana_se</item>
 		<item>@drawable/hiragana_te</item>
 		<item>@drawable/hiragana_ne</item>
 		<item>@drawable/hiragana_he</item>
@@ -206,7 +206,7 @@
 		<item>@drawable/hiragana_re</item>
 		<item>@drawable/hiragana_o</item>
 		<item>@drawable/hiragana_ko</item>
-		<item>@drawable/ic_hiragana_so</item>
+		<item>@drawable/hiragana_so</item>
 		<item>@drawable/hiragana_to</item>
 		<item>@drawable/hiragana_no</item>
 		<item>@drawable/hiragana_ho</item>
@@ -218,52 +218,52 @@
 		<item>@drawable/hiragana_we</item>
 	</array>
 	<array name="hiragana_characters_stroke_gif">
-		<item>@drawable/hiragana_a_stroke_order_animation</item>
-		<item>@drawable/hiragana_ka_stroke_order_animation</item>
-		<item>@drawable/hiragana_sa_stroke_order_animation</item>
-		<item>@drawable/hiragana_ta_stroke_order_animation</item>
-		<item>@drawable/hiragana_na_stroke_order_animation</item>
-		<item>@drawable/hiragana_ha_stroke_order_animation</item>
-		<item>@drawable/hiragana_ma_stroke_order_animation</item>
-		<item>@drawable/hiragana_ya_stroke_order_animation</item>
-		<item>@drawable/hiragana_ra_stroke_order_animation</item>
-		<item>@drawable/hiragana_wa_stroke_order_animation</item>
-		<item>@drawable/hiragana_n_stroke_order_animation</item>
-		<item>@drawable/hiragana_i_stroke_order_animation</item>
-		<item>@drawable/hiragana_ki_stroke_order_animation</item>
-		<item>@drawable/hiragana_shi_stroke_order_animation</item>
-		<item>@drawable/hiragana_chi_stroke_order_animation</item>
-		<item>@drawable/hiragana_ni_stroke_order_animation</item>
-		<item>@drawable/hiragana_hi_stroke_order_animation</item>
-		<item>@drawable/hiragana_mi_stroke_order_animation</item>
-		<item>@drawable/hiragana_ri_stroke_order_animation</item>
-		<item>@drawable/hiragana_u_stroke_order_animation</item>
-		<item>@drawable/hiragana_ku_stroke_order_animation</item>
-		<item>@drawable/hiragana_su_stroke_order_animation</item>
-		<item>@drawable/hiragana_tsu_stroke_order_animation</item>
-		<item>@drawable/hiragana_nu_stroke_order_animation</item>
-		<item>@drawable/hiragana_fu_stroke_order_animation</item>
-		<item>@drawable/hiragana_mu_stroke_order_animation</item>
-		<item>@drawable/hiragana_yu_stroke_order_animation</item>
-		<item>@drawable/hiragana_ru_stroke_order_animation</item>
-		<item>@drawable/hiragana_e_stroke_order_animation</item>
-		<item>@drawable/hiragana_ke_stroke_order_animation</item>
-		<item>@drawable/hiragana_se_stroke_order_animation</item>
-		<item>@drawable/hiragana_te_stroke_order_animation</item>
-		<item>@drawable/hiragana_ne_stroke_order_animation</item>
-		<item>@drawable/hiragana_he_stroke_order_animation</item>
-		<item>@drawable/hiragana_me_stroke_order_animation</item>
-		<item>@drawable/hiragana_re_stroke_order_animation</item>
-		<item>@drawable/hiragana_o_stroke_order_animation</item>
-		<item>@drawable/hiragana_ko_stroke_order_animation</item>
-		<item>@drawable/hiragana_so_stroke_order_animation</item>
-		<item>@drawable/hiragana_to_stroke_order_animation</item>
-		<item>@drawable/hiragana_no_stroke_order_animation</item>
-		<item>@drawable/hiragana_ho_stroke_order_animation</item>
-		<item>@drawable/hiragana_mo_stroke_order_animation</item>
-		<item>@drawable/hiragana_yo_stroke_order_animation</item>
-		<item>@drawable/hiragana_ro_stroke_order_animation</item>
-		<item>@drawable/hiragana_wo_stroke_order_animation</item>
+		<item>@drawable/hiragana_a_animation</item>
+		<item>@drawable/hiragana_ka_animation</item>
+		<item>@drawable/hiragana_sa_animation</item>
+		<item>@drawable/hiragana_ta_animation</item>
+		<item>@drawable/hiragana_na_animation</item>
+		<item>@drawable/hiragana_ha_animation</item>
+		<item>@drawable/hiragana_ma_animation</item>
+		<item>@drawable/hiragana_ya_animation</item>
+		<item>@drawable/hiragana_ra_animation</item>
+		<item>@drawable/hiragana_wa_animation</item>
+		<item>@drawable/hiragana_n_animation</item>
+		<item>@drawable/hiragana_i_animation</item>
+		<item>@drawable/hiragana_ki_animation</item>
+		<item>@drawable/hiragana_shi_animation</item>
+		<item>@drawable/hiragana_chi_animation</item>
+		<item>@drawable/hiragana_ni_animation</item>
+		<item>@drawable/hiragana_hi_animation</item>
+		<item>@drawable/hiragana_mi_animation</item>
+		<item>@drawable/hiragana_ri_animation</item>
+		<item>@drawable/hiragana_u_animation</item>
+		<item>@drawable/hiragana_ku_animation</item>
+		<item>@drawable/hiragana_su_animation</item>
+		<item>@drawable/hiragana_tsu_animation</item>
+		<item>@drawable/hiragana_nu_animation</item>
+		<item>@drawable/hiragana_fu_animation</item>
+		<item>@drawable/hiragana_mu_animation</item>
+		<item>@drawable/hiragana_yu_animation</item>
+		<item>@drawable/hiragana_ru_animation</item>
+		<item>@drawable/hiragana_e_animation</item>
+		<item>@drawable/hiragana_ke_animation</item>
+		<item>@drawable/hiragana_se_animation</item>
+		<item>@drawable/hiragana_te_animation</item>
+		<item>@drawable/hiragana_ne_animation</item>
+		<item>@drawable/hiragana_he_animation</item>
+		<item>@drawable/hiragana_me_animation</item>
+		<item>@drawable/hiragana_re_animation</item>
+		<item>@drawable/hiragana_o_animation</item>
+		<item>@drawable/hiragana_ko_animation</item>
+		<item>@drawable/hiragana_so_animation</item>
+		<item>@drawable/hiragana_to_animation</item>
+		<item>@drawable/hiragana_no_animation</item>
+		<item>@drawable/hiragana_ho_animation</item>
+		<item>@drawable/hiragana_mo_animation</item>
+		<item>@drawable/hiragana_yo_animation</item>
+		<item>@drawable/hiragana_ro_animation</item>
+		<item>@drawable/hiragana_wo_animation</item>
 	</array>
 	<array name="hiragana_characters_stroke">
 		<item>@drawable/hiragana_a_bw</item>
@@ -366,52 +366,52 @@
 		<item>@drawable/katakana_we</item>
 	</array>
 	<array name="katakana_characters_stroke_gif">
-		<item>@drawable/katakana_a_stroke_order_animation</item>
-		<item>@drawable/katakana_ka_stroke_order_animation</item>
-		<item>@drawable/katakana_sa_stroke_order_animation</item>
-		<item>@drawable/katakana_ta_stroke_order_animation</item>
-		<item>@drawable/katakana_na_stroke_order_animation</item>
-		<item>@drawable/katakana_ha_stroke_order_animation</item>
-		<item>@drawable/katakana_ma_stroke_order_animation</item>
-		<item>@drawable/katakana_ya_stroke_order_animation</item>
-		<item>@drawable/katakana_ra_stroke_order_animation</item>
-		<item>@drawable/katakana_wa_stroke_order_animation</item>
-		<item>@drawable/katakana_n_stroke_order_animation</item>
-		<item>@drawable/katakana_i_stroke_order_animation</item>
-		<item>@drawable/katakana_ki_stroke_order_animation</item>
-		<item>@drawable/katakana_shi_stroke_order_animation</item>
-		<item>@drawable/katakana_chi_stroke_order_animation</item>
-		<item>@drawable/katakana_ni_stroke_order_animation</item>
-		<item>@drawable/katakana_hi_stroke_order_animation</item>
-		<item>@drawable/katakana_mi_stroke_order_animation</item>
-		<item>@drawable/katakana_ri_stroke_order_animation</item>
-		<item>@drawable/katakana_u_stroke_order_animation</item>
-		<item>@drawable/katakana_ku_stroke_order_animation</item>
-		<item>@drawable/katakana_su_stroke_order_animation</item>
-		<item>@drawable/katakana_tsu_stroke_order_animation</item>
-		<item>@drawable/katakana_nu_stroke_order_animation</item>
-		<item>@drawable/katakana_fu_stroke_order_animation</item>
-		<item>@drawable/katakana_mu_stroke_order_animation</item>
-		<item>@drawable/katakana_yu_stroke_order_animation</item>
-		<item>@drawable/katakana_ru_stroke_order_animation</item>
-		<item>@drawable/katakana_e_stroke_order_animation</item>
-		<item>@drawable/katakana_ke_stroke_order_animation</item>
-		<item>@drawable/katakana_se_stroke_order_animation</item>
-		<item>@drawable/katakana_te_stroke_order_animation</item>
-		<item>@drawable/katakana_ne_stroke_order_animation</item>
-		<item>@drawable/katakana_he_stroke_order_animation</item>
-		<item>@drawable/katakana_me_stroke_order_animation</item>
-		<item>@drawable/katakana_re_stroke_order_animation</item>
-		<item>@drawable/katakana_o_stroke_order_animation</item>
-		<item>@drawable/katakana_ko_stroke_order_animation</item>
-		<item>@drawable/katakana_so_stroke_order_animation</item>
-		<item>@drawable/katakana_to_stroke_order_animation</item>
-		<item>@drawable/katakana_no_stroke_order_animation</item>
-		<item>@drawable/katakana_ho_stroke_order_animation</item>
-		<item>@drawable/katakana_mo_stroke_order_animation</item>
-		<item>@drawable/katakana_yo_stroke_order_animation</item>
-		<item>@drawable/katakana_ro_stroke_order_animation</item>
-		<item>@drawable/katakana_wo_stroke_order_animation</item>
+		<item>@drawable/katakana_a_animation</item>
+		<item>@drawable/katakana_ka_animation</item>
+		<item>@drawable/katakana_sa_animation</item>
+		<item>@drawable/katakana_ta_animation</item>
+		<item>@drawable/katakana_na_animation</item>
+		<item>@drawable/katakana_ha_animation</item>
+		<item>@drawable/katakana_ma_animation</item>
+		<item>@drawable/katakana_ya_animation</item>
+		<item>@drawable/katakana_ra_animation</item>
+		<item>@drawable/katakana_wa_animation</item>
+		<item>@drawable/katakana_n_animation</item>
+		<item>@drawable/katakana_i_animation</item>
+		<item>@drawable/katakana_ki_animation</item>
+		<item>@drawable/katakana_shi_animation</item>
+		<item>@drawable/katakana_chi_animation</item>
+		<item>@drawable/katakana_ni_animation</item>
+		<item>@drawable/katakana_hi_animation</item>
+		<item>@drawable/katakana_mi_animation</item>
+		<item>@drawable/katakana_ri_animation</item>
+		<item>@drawable/katakana_u_animation</item>
+		<item>@drawable/katakana_ku_animation</item>
+		<item>@drawable/katakana_su_animation</item>
+		<item>@drawable/katakana_tsu_animation</item>
+		<item>@drawable/katakana_nu_animation</item>
+		<item>@drawable/katakana_fu_animation</item>
+		<item>@drawable/katakana_mu_animation</item>
+		<item>@drawable/katakana_yu_animation</item>
+		<item>@drawable/katakana_ru_animation</item>
+		<item>@drawable/katakana_e_animation</item>
+		<item>@drawable/katakana_ke_animation</item>
+		<item>@drawable/katakana_se_animation</item>
+		<item>@drawable/katakana_te_animation</item>
+		<item>@drawable/katakana_ne_animation</item>
+		<item>@drawable/katakana_he_animation</item>
+		<item>@drawable/katakana_me_animation</item>
+		<item>@drawable/katakana_re_animation</item>
+		<item>@drawable/katakana_o_animation</item>
+		<item>@drawable/katakana_ko_animation</item>
+		<item>@drawable/katakana_so_animation</item>
+		<item>@drawable/katakana_to_animation</item>
+		<item>@drawable/katakana_no_animation</item>
+		<item>@drawable/katakana_ho_animation</item>
+		<item>@drawable/katakana_mo_animation</item>
+		<item>@drawable/katakana_yo_animation</item>
+		<item>@drawable/katakana_ro_animation</item>
+		<item>@drawable/katakana_wo_animation</item>
 	</array>
 	<array name="katakana_characters_stroke">
 		<item>@drawable/katakana_a_bw</item>
