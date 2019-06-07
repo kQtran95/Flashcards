@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
 	private var romanjiArray: Array<String>? = null
 	private val icons = ArrayList<Int>()
 	private var menu: Menu? = null
+	private var image: ImageView? = null
+	private var textView: TextView? = null
 	private val romanji = 0
 	private val hiragana = 1
 	private val katakana = 2
@@ -37,6 +39,9 @@ class MainActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 		val paintView = findViewById<PaintView>(R.id.paintView)
+		image = findViewById(R.id.kanaViewer)
+		textView = findViewById(R.id.romanjiViewer)
+		
 		val metrics = DisplayMetrics()
 		windowManager.defaultDisplay.getMetrics(metrics)
 		paintView.init(metrics)
@@ -78,8 +83,6 @@ class MainActivity : AppCompatActivity() {
 	}
 	
 	fun upSwipe() {
-		val image: ImageView? = findViewById(R.id.kanaViewer)
-		val textView: TextView? = findViewById(R.id.romanjiViewer)
 		when (currentView) {
 			romanji -> {
 				displayArray = resources.obtainTypedArray(R.array.hiragana_characters)
@@ -98,8 +101,6 @@ class MainActivity : AppCompatActivity() {
 	}
 	
 	fun downSwipe() {
-		val image: ImageView? = findViewById(R.id.kanaViewer)
-		val textView: TextView? = findViewById(R.id.romanjiViewer)
 		when (currentView) {
 			romanji -> {
 				displayArray = resources.obtainTypedArray(R.array.katakana_characters)
@@ -109,14 +110,12 @@ class MainActivity : AppCompatActivity() {
 				image!!.visibility = View.GONE
 				textView!!.visibility = View.VISIBLE
 				romanjiArray = resources.getStringArray(R.array.characters_romanji)
-				textView.text = (romanjiArray as Array<String>)[index]
+				textView!!.text = (romanjiArray as Array<String>)[index]
 			}
 		}
 	}
 	
 	fun oneTap() {
-		val image: ImageView? = findViewById(R.id.kanaViewer)
-		val textView: TextView? = findViewById(R.id.romanjiViewer)
 		if (currentView == romanji) {
 			image!!.visibility = View.GONE
 			textView!!.visibility = View.VISIBLE
@@ -136,13 +135,8 @@ class MainActivity : AppCompatActivity() {
 	}
 	
 	fun displayKana() {
-		val image: ImageView? = findViewById(R.id.kanaViewer)
 		image!!.visibility = View.VISIBLE
-		
-		if (currentView == romanji) {
-			val textView: TextView? = findViewById(R.id.romanjiViewer)
-			textView!!.visibility = View.GONE
-		}
+		textView!!.visibility = View.GONE
 		
 		val array = ArrayList<Int>()
 		if (displayArray != null) {
@@ -151,28 +145,22 @@ class MainActivity : AppCompatActivity() {
 				array.add(icon)
 			}
 		}
-		image.let { Glide.with(this).load(array[index]).into(it) }
+		image.let { Glide.with(this).load(array[index]).into(it!!) }
 	}
 	
 	fun nextImage(index: Int) {
-		val textView: TextView? = findViewById(R.id.romanjiViewer)
 		textView!!.visibility = View.GONE
-		
-		val image: ImageView? = findViewById(R.id.kanaViewer)
 		image!!.visibility = View.VISIBLE
 		if (icons.size > 0)
-			image.let { Glide.with(this).load(icons[index]).into(it) }
+			image.let { Glide.with(this).load(icons[index]).into(it!!) }
 		paintView.clear()
 	}
 	
 	fun nextCharacter(index: Int) {
-		val image: ImageView? = findViewById(R.id.kanaViewer)
 		image!!.visibility = View.GONE
-		
-		val textView: TextView? = findViewById(R.id.romanjiViewer)
 		textView!!.visibility = View.VISIBLE
 		romanjiArray = resources.getStringArray(R.array.characters_romanji)
-		textView.text = (romanjiArray as Array<String>)[index]
+		textView!!.text = (romanjiArray as Array<String>)[index]
 		paintView.clear()
 	}
 	
