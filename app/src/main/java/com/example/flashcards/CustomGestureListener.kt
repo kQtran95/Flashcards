@@ -27,7 +27,7 @@ class CustomGestureListener : GestureDetector.SimpleOnGestureListener() {
 		val deltaYAbs = Math.abs(deltaY)
 		
 		// Only when swipe distance between minimal and maximal distance value then we treat it as effective swipe
-		if (deltaXAbs in 100.0..1000.0) {
+		if (deltaXAbs in 200.0..1000.0) {
 			if (deltaX > 0) {
 				this.activity!!.rightSwipe()
 			} else {

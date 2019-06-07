@@ -78,36 +78,56 @@ class MainActivity : AppCompatActivity() {
 	}
 	
 	fun upSwipe() {
-		if (currentView == romanji || currentView == katakana) {
-			displayArray = resources.obtainTypedArray(R.array.hiragana_characters)
-			displayKana()
-		} else if (currentView == hiragana) {
-			displayArray = resources.obtainTypedArray(R.array.katakana_characters)
-			displayKana()
+		val image: ImageView? = findViewById(R.id.kanaViewer)
+		val textView: TextView? = findViewById(R.id.romanjiViewer)
+		when (currentView) {
+			romanji -> {
+				displayArray = resources.obtainTypedArray(R.array.hiragana_characters)
+				displayKana()
+			}
+			hiragana -> {
+				displayArray = resources.obtainTypedArray(R.array.katakana_characters)
+				displayKana()
+			}
+			katakana -> {
+				displayArray = resources.obtainTypedArray(R.array.hiragana_characters)
+				displayKana()
+			}
 		}
+		
 	}
 	
 	fun downSwipe() {
-		if (currentView == romanji || currentView == hiragana) {
-			displayArray = resources.obtainTypedArray(R.array.katakana_characters)
-			displayKana()
-		} else if (currentView == katakana) {
-			displayArray = resources.obtainTypedArray(R.array.hiragana_characters)
-			displayKana()
+		val image: ImageView? = findViewById(R.id.kanaViewer)
+		val textView: TextView? = findViewById(R.id.romanjiViewer)
+		when (currentView) {
+			romanji -> {
+				displayArray = resources.obtainTypedArray(R.array.katakana_characters)
+				displayKana()
+			}
+			katakana, hiragana -> {
+				image!!.visibility = View.GONE
+				textView!!.visibility = View.VISIBLE
+				romanjiArray = resources.getStringArray(R.array.characters_romanji)
+				textView.text = (romanjiArray as Array<String>)[index]
+			}
 		}
 	}
 	
 	fun oneTap() {
-		//TODO back to original view
 		val image: ImageView? = findViewById(R.id.kanaViewer)
 		val textView: TextView? = findViewById(R.id.romanjiViewer)
-		
 		if (currentView == romanji) {
 			image!!.visibility = View.GONE
 			textView!!.visibility = View.VISIBLE
 		} else if (currentView == katakana || currentView == hiragana) {
-			textView!!.visibility = View.VISIBLE
-			image!!.visibility = View.GONE
+			textView!!.visibility = View.GONE
+			image!!.visibility = View.VISIBLE
+			when (currentView) {
+				katakana -> displayArray = resources.obtainTypedArray(R.array.katakana_characters)
+				hiragana -> displayArray = resources.obtainTypedArray(R.array.hiragana_characters)
+			}
+			displayKana()
 		}
 	}
 	
@@ -140,8 +160,8 @@ class MainActivity : AppCompatActivity() {
 		
 		val image: ImageView? = findViewById(R.id.kanaViewer)
 		image!!.visibility = View.VISIBLE
-		
-		image.let { Glide.with(this).load(icons[index]).into(it) }
+		if (icons.size > 0)
+			image.let { Glide.with(this).load(icons[index]).into(it) }
 		paintView.clear()
 	}
 	
@@ -166,6 +186,7 @@ class MainActivity : AppCompatActivity() {
 	private fun displayImageArray(arrayLocation: Int) {
 		displayArray = resources.obtainTypedArray(arrayLocation)
 		if (displayArray != null) {
+			icons.clear()
 			(0 until displayArray!!.length()).forEach {
 				val icon = displayArray!!.getResourceId(it, -1)
 				icons.add(icon)
