@@ -7,6 +7,7 @@ import android.support.v4.view.GestureDetectorCompat
 import android.widget.ImageView
 import android.widget.Button
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -15,6 +16,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.collections.ArrayList
+
 
 class MainActivity : AppCompatActivity() {
 	
@@ -28,12 +30,10 @@ class MainActivity : AppCompatActivity() {
 	private val romanji = 0
 	private val hiragana = 1
 	private val katakana = 2
-	private val vocabulary = 3
 	private var currentView: Int = -1
 	private var index = 0
 	private var strings = false
 	private val total = 47
-	private var map: MutableMap<String, String>? = null
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -49,22 +49,6 @@ class MainActivity : AppCompatActivity() {
 		gestureListener.setActivity(this)
 		gestureDetectorCompat = GestureDetectorCompat(this, gestureListener)
 		addListenerOnClearButton()
-		makeMap()
-	}
-	
-	private fun makeMap() {
-		map!!["Good morning"] = "おはよう"
-		map!!["Good morning (polite)"] = "おはようございます"
-		map!!["Good afternoon"] = "こんにちは"
-		map!!["Good evening"] = "こんばんは"
-		map!!["Good-bye"] = "さようなら"
-		map!!["Good night"] = "おやすみ"
-		map!!["Thank you"] = "ありがとう"
-		map!!["Thank you (polite)"] = "ありがとうございます"
-		map!!["Excuse me.; I'm sorry"] = "すみません"
-		map!!["No"] = "いいえ"
-		map!!["I'm leaving"] = "いってきます"
-		map!!["Good morning. (polite)"] = "11"
 	}
 	
 	private fun makeAndShuffleList(elements: Int): ArrayList<Int> {
@@ -113,6 +97,7 @@ class MainActivity : AppCompatActivity() {
 				displayKana()
 			}
 		}
+		
 	}
 	
 	fun downSwipe() {
@@ -172,14 +157,6 @@ class MainActivity : AppCompatActivity() {
 	}
 	
 	fun nextCharacter(index: Int) {
-		image!!.visibility = View.GONE
-		textView!!.visibility = View.VISIBLE
-		romanjiArray = resources.getStringArray(R.array.characters_romanji)
-		textView!!.text = (romanjiArray as Array<String>)[index]
-		paintView.clear()
-	}
-	
-	fun nextWord(index: Int) {
 		image!!.visibility = View.GONE
 		textView!!.visibility = View.VISIBLE
 		romanjiArray = resources.getStringArray(R.array.characters_romanji)
@@ -247,12 +224,6 @@ class MainActivity : AppCompatActivity() {
 			}
 			R.id.katakanaCharacterGifs -> {
 				displayImageArray(R.array.katakana_characters_stroke_gif)
-				return true
-			}
-			R.id.vocabulary -> {
-				strings = true
-				currentView = vocabulary
-				nextWord(0)
 				return true
 			}
 		}
