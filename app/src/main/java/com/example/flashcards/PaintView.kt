@@ -9,14 +9,13 @@ import java.util.ArrayList
 import android.view.MotionEvent
 import android.graphics.Bitmap
 import android.util.DisplayMetrics
-
-
+import android.util.Log
 
 class PaintView (context: Context, attrs: AttributeSet? = null,
                  private var mX: Float = 0.toFloat(), private var mY: Float = 0.toFloat()
 ) : View(context, attrs) {
 	private var brushSize = 20
-	private val defaultColor = Color.RED
+	private var defaultColor = Color.BLACK
 	private var defaultBGColor = Color.WHITE
 	private val touchTolerance = 4f
 	private var mPath: Path? = null
@@ -68,7 +67,6 @@ class PaintView (context: Context, attrs: AttributeSet? = null,
 		mCanvas!!.drawColor(defaultBGColor)
 		
 		for (fp in paths) {
-			mPaint.color = fp.color
 			mPaint.strokeWidth = fp.strokeWidth.toFloat()
 			mPaint.maskFilter = null
 			
@@ -126,5 +124,9 @@ class PaintView (context: Context, attrs: AttributeSet? = null,
 		}
 		
 		return true
+	}
+	
+	fun changeColor(color: Int) {
+		mPaint.color = color
 	}
 }

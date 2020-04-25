@@ -252,7 +252,7 @@ class MainActivity : AppCompatActivity() {
 				
 				Log.d(TAG, data?.getStringExtra("colorChoiceHex"))
 				val color = Color.parseColor("#"+data?.getStringExtra("colorChoiceHex"))
-				paintView.postInvalidate()
+				paintView.changeColor(color)
 			}
 		}
 	}

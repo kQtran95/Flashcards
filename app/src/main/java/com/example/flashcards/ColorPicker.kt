@@ -12,7 +12,7 @@ import com.skydoves.colorpickerview.ColorPickerDialog
 import com.skydoves.colorpickerview.ColorPickerView
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 
-
+//TODO ADD BLACK COLOR
 class ColorPicker : AppCompatActivity() {
 	private var colorPickerView: ColorPickerView? = null
 	private val FLAG_PALETTE = false
@@ -60,6 +60,7 @@ class ColorPicker : AppCompatActivity() {
 		Log.d("COLORPICKER", hexCode.substring(2))
 		val resultIntent = Intent()
 		resultIntent.putExtra("colorChoiceHex", hexCode.substring(2))
+//		resultIntent.putExtra("colorChoiceHex", hexCode)
 		setResult(Activity.RESULT_OK, resultIntent)
 		finish()
 	}
