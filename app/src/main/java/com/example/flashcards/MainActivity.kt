@@ -1,18 +1,17 @@
 package com.example.flashcards
 
 import android.content.res.TypedArray
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.view.GestureDetectorCompat
+import androidx.core.view.GestureDetectorCompat
 import android.widget.ImageView
 import android.widget.Button
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.collections.ArrayList
