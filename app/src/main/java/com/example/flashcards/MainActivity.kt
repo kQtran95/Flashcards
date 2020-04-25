@@ -1,25 +1,27 @@
 package com.example.flashcards
 
+import android.app.Activity
 import android.content.Intent
 import android.content.res.TypedArray
+import android.graphics.Color
+import android.graphics.Paint
 import android.os.Bundle
-import androidx.core.view.GestureDetectorCompat
-import android.widget.ImageView
-import android.widget.Button
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GestureDetectorCompat
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
-	
+	private val TAG = "MainActivity"
 	private var gestureDetectorCompat: GestureDetectorCompat? = null
 	private var displayArray: TypedArray? = null
 	private var romanjiArray: Array<String>? = null
@@ -34,11 +36,12 @@ class MainActivity : AppCompatActivity() {
 	private var index = 0
 	private var strings = false
 	private val total = 47
+	private lateinit var paintView: PaintView
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
-		val paintView = findViewById<PaintView>(R.id.paintView)
+		paintView = findViewById(R.id.paintView)
 		image = findViewById(R.id.kanaViewer)
 		textView = findViewById(R.id.romanjiViewer)
 		
@@ -235,6 +238,22 @@ class MainActivity : AppCompatActivity() {
 	fun displayColorPicker(item: MenuItem) {
 		val intent = Intent(this, ColorPicker::class.java).apply {
 		}
-		startActivity(intent)
+		startActivityForResult(intent, 1)
+	}
+	
+	override fun onActivityResult(
+		requestCode: Int, resultCode: Int,
+		data: Intent?
+	) {
+		super.onActivityResult(requestCode, resultCode, data)
+		
+		if (requestCode == 1) {
+			if (resultCode == Activity.RESULT_OK) {
+				
+				Log.d(TAG, data?.getStringExtra("colorChoiceHex"))
+				val color = Color.parseColor("#"+data?.getStringExtra("colorChoiceHex"))
+				paintView.postInvalidate()
+			}
+		}
 	}
 }

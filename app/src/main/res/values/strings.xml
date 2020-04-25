@@ -464,4 +464,7 @@
 		<item>@drawable/katakana_wi_bw</item>
 		<item>@drawable/katakana_we_bw</item>
 	</array>
+	<string name="confirm">Confirm</string>
+	<string name="cancel">Cancel</string>
+	<string name="color_select_button">Choose Color</string>
 </resources>
