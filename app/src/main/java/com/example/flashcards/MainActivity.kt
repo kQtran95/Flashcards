@@ -1,5 +1,6 @@
 package com.example.flashcards
 
+import android.content.Intent
 import android.content.res.TypedArray
 import android.os.Bundle
 import androidx.core.view.GestureDetectorCompat
@@ -228,5 +229,12 @@ class MainActivity : AppCompatActivity() {
 		}
 		
 		return super.onOptionsItemSelected(item)
+	}
+	
+	/** Called when the user taps the Change Pen Color button */
+	fun displayColorPicker(item: MenuItem) {
+		val intent = Intent(this, ColorPicker::class.java).apply {
+		}
+		startActivity(intent)
 	}
 }

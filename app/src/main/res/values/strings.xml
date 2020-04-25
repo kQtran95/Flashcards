@@ -11,6 +11,7 @@
 	<string name="katakanaCharacterStrokes">Katakana Characters Strokes</string>
 	<string name="select_array">Select Array</string>
 	<string name="viewer_for_pngs">Viewer for pngs</string>
+	<string name="Color_Picker_Menu">Change Pen Color</string>
 	<array name="hiragana_full_Characters">
 		<item>@drawable/full_hiragana_a</item>
 		<item>@drawable/full_hiragana_ka</item>

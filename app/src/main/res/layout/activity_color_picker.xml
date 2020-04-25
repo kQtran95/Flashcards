@@ -5,5 +5,15 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		tools:context=".ColorPicker">
-
+	
+	<com.skydoves.colorpickerview.ColorPickerView
+			android:id="@+id/colorPickerView"
+			android:layout_width="300dp"
+			android:layout_height="300dp"
+			android:layout_marginTop="16dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:palette="@drawable/palette"
+			app:selector="@drawable/wheel" />
 </androidx.constraintlayout.widget.ConstraintLayout>

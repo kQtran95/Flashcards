@@ -21,4 +21,9 @@
 	<item android:id="@+id/katakanaCharacterStrokes"
 	      android:title="@string/katakanaCharacterStrokes"
 	      app:showAsAction="withText"/>
+	<item
+			android:id="@+id/ColorPickerActivity"
+			android:onClick="displayColorPicker"
+			android:title="@string/Color_Picker_Menu"
+			app:showAsAction="withText" />
 </menu>
