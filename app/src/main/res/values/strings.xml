@@ -466,5 +466,5 @@
 	</array>
 	<string name="confirm">Confirm</string>
 	<string name="cancel">Cancel</string>
-	<string name="color_select_button">Choose Color</string>
+	<string name="color_select_button">Select Color</string>
 </resources>

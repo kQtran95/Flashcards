@@ -11,6 +11,8 @@ import com.skydoves.colorpickerview.ColorEnvelope
 import com.skydoves.colorpickerview.ColorPickerDialog
 import com.skydoves.colorpickerview.ColorPickerView
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
+import com.skydoves.colorpickerview.sliders.AlphaSlideBar
+import com.skydoves.colorpickerview.sliders.BrightnessSlideBar
 
 //TODO ADD BLACK COLOR
 class ColorPicker : AppCompatActivity() {
@@ -29,12 +31,12 @@ class ColorPicker : AppCompatActivity() {
 				setLayoutColor(envelope)
 			})
 		
-//		var alphaSlideBar: AlphaSlideBar = findViewById(R.id.alphaSlideBar)
-//		colorPickerView?.attachAlphaSlider(alphaSlideBar)
+		var alphaSlideBar: AlphaSlideBar = findViewById(R.id.alphaSlideBar)
+		colorPickerView?.attachAlphaSlider(alphaSlideBar)
 	
-//		val brightnessSlideBar: BrightnessSlideBar = findViewById(R.id.brightnessSlide)
-//		colorPickerView?.attachBrightnessSlider(brightnessSlideBar)
-//		colorPickerView?.setLifecycleOwner(this)
+		val brightnessSlideBar: BrightnessSlideBar = findViewById(R.id.brightnessSlide)
+		colorPickerView?.attachBrightnessSlider(brightnessSlideBar)
+		colorPickerView?.setLifecycleOwner(this)
 	}
 	
 	private fun setLayoutColor(envelope: ColorEnvelope) {
