@@ -3,7 +3,6 @@ package com.example.flashcards
 import android.view.MotionEvent
 import android.view.GestureDetector
 
-
 class CustomGestureListener : GestureDetector.SimpleOnGestureListener() {
 	
 	// Source activity that display message in text view.
