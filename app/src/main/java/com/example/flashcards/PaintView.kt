@@ -40,12 +40,13 @@ class PaintView (context: Context, attrs: AttributeSet? = null,
 		mPaint.alpha = 0xff
 	}
 	
-	fun init(metrics: DisplayMetrics) {
-		val height = metrics.heightPixels
-		val width = metrics.widthPixels
+	fun init(metrics: Rect) {
+		val height = metrics.height()
+		val width = metrics.width()
 		
-		mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-		mCanvas = Canvas(mBitmap)
+		var bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+		mBitmap = bitmap
+		mCanvas = Canvas(bitmap)
 		
 		currentColor = defaultColor
 		strokeWidth = brushSize
@@ -73,8 +74,8 @@ class PaintView (context: Context, attrs: AttributeSet? = null,
 			mCanvas!!.drawPath(fp.path, mPaint)
 			
 		}
-		
-		canvas.drawBitmap(mBitmap, 0.toFloat(), 0.toFloat(), mBitmapPaint)
+
+		mBitmap?.let { canvas.drawBitmap(it, 0.toFloat(), 0.toFloat(), mBitmapPaint) }
 		canvas.restore()
 	}
 	

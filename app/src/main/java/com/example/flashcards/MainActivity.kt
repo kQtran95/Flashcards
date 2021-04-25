@@ -4,21 +4,23 @@ import android.app.Activity
 import android.content.Intent
 import android.content.res.TypedArray
 import android.graphics.Color
-import android.graphics.Paint
+import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import android.view.MotionEvent
-import android.view.View
+import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import com.bumptech.glide.Glide
-
+import java.util.*
+import java.util.EnumSet.range
+import kotlin.collections.ArrayDeque
+import kotlin.collections.ArrayList
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 	private val TAG = "MainActivity"
@@ -38,34 +40,21 @@ class MainActivity : AppCompatActivity() {
 	private val total = 47
 	private lateinit var paintView: PaintView
 	
+	@RequiresApi(Build.VERSION_CODES.R)
+	@ExperimentalStdlibApi
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 		paintView = findViewById(R.id.paintView)
 		image = findViewById(R.id.kanaViewer)
 		textView = findViewById(R.id.romanjiViewer)
-		
-		val metrics = DisplayMetrics()
-		windowManager.defaultDisplay.getMetrics(metrics)
-		paintView.init(metrics)
+		val metrics: WindowMetrics = windowManager.currentWindowMetrics
+		paintView.init(metrics.bounds)
 		val gestureListener = CustomGestureListener()
 		gestureListener.setActivity(this)
 		gestureDetectorCompat = GestureDetectorCompat(this, gestureListener)
 		addListenerOnClearButton()
-	}
-	
-	private fun makeAndShuffleList(elements: Int): ArrayList<Int> {
-		val list = ArrayList<Int>()
-		for (i in 0..elements) {
-			list.add(i)
-		}
-		list.shuffle()
-		return list
-	}
-	
-	override fun onTouchEvent(event: MotionEvent): Boolean {
-		gestureDetectorCompat!!.onTouchEvent(event)
-		return true
+		addListenerOnRandomButton()
 	}
 	
 	fun displayMessage(message: String) {
@@ -100,7 +89,6 @@ class MainActivity : AppCompatActivity() {
 				displayKana()
 			}
 		}
-		
 	}
 	
 	fun downSwipe() {
@@ -166,11 +154,23 @@ class MainActivity : AppCompatActivity() {
 		textView!!.text = (romanjiArray as Array<String>)[index]
 		paintView.clear()
 	}
-	
+
 	private fun addListenerOnClearButton() {
 		val button: Button? = findViewById(R.id.clearButton)
 		button?.setOnClickListener {
 			paintView.clear()
+		}
+	}
+
+	@ExperimentalStdlibApi
+	private fun addListenerOnRandomButton() {
+		val button: Button? = findViewById(R.id.randomButton)
+		var stack = makeAndShuffleList()
+		button?.setOnClickListener {
+			Log.println(Log.INFO, TAG, stack.toString())
+			if (stack.isEmpty())
+				stack = makeAndShuffleList()
+			if (strings) nextCharacter(stack.removeFirst()) else nextImage(stack.removeFirst())
 		}
 	}
 	
@@ -185,14 +185,7 @@ class MainActivity : AppCompatActivity() {
 		}
 		nextImage(0)
 	}
-	
-	override fun onCreateOptionsMenu(menu: Menu): Boolean {
-		val menuInflater = menuInflater
-		menuInflater.inflate(R.menu.main, menu)
-		this.menu = menu
-		return super.onCreateOptionsMenu(menu)
-	}
-	
+
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		index = 0
 		strings = false
@@ -233,12 +226,33 @@ class MainActivity : AppCompatActivity() {
 		
 		return super.onOptionsItemSelected(item)
 	}
-	
+
+	@ExperimentalStdlibApi
+	private fun makeAndShuffleList(): ArrayDeque<Int> {
+		val numbers = MutableList<Int>(total) { it + 1 }.shuffled()
+		val stack = ArrayDeque<Int>()
+		for (i in numbers)
+			stack.add(i)
+		return stack
+	}
+
 	/** Called when the user taps the Change Pen Color button */
 	fun displayColorPicker(item: MenuItem) {
 		val intent = Intent(this, ColorPicker::class.java).apply {
 		}
 		startActivityForResult(intent, 1)
+	}
+
+	override fun onCreateOptionsMenu(menu: Menu): Boolean {
+		val menuInflater = menuInflater
+		menuInflater.inflate(R.menu.main, menu)
+		this.menu = menu
+		return super.onCreateOptionsMenu(menu)
+	}
+
+	override fun onTouchEvent(event: MotionEvent): Boolean {
+		gestureDetectorCompat!!.onTouchEvent(event)
+		return true
 	}
 	
 	override fun onActivityResult(
@@ -249,9 +263,8 @@ class MainActivity : AppCompatActivity() {
 		
 		if (requestCode == 1) {
 			if (resultCode == Activity.RESULT_OK) {
-				
-				Log.d(TAG, data?.getStringExtra("colorChoiceHex"))
-				val color = Color.parseColor("#"+data?.getStringExtra("colorChoiceHex"))
+//				Log.d(TAG, data?.getStringExtra("colorChoiceHex"))
+				val color = Color.parseColor("#" + data?.getStringExtra("colorChoiceHex"))
 				paintView.changeColor(color)
 			}
 		}

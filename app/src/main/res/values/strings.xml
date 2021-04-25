@@ -2,6 +2,7 @@
 	<string name="app_name">Flashcards</string>
 	<string name="flash_cards">Flash Cards</string>
 	<string name="clear">clear</string>
+	<string name="random">random</string>
 	<string name="romanjiCharacter">Romanji Characters</string>
 	<string name="hiraganaCharacter">Hiragana Characters</string>
 	<string name="hiraganaCharacterGifs">Hiragana Characters Strokes Gifs</string>

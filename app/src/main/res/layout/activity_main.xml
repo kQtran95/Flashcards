@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-    
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -16,30 +16,60 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-        
+
         <ImageView
                 android:id="@+id/kanaViewer"
                 android:layout_width="fill_parent"
                 android:layout_height="250dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/viewer_for_pngs" />
-        
+
         <TextView
                 android:id="@+id/romanjiViewer"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:gravity="center"
                 android:textSize="100sp" />
-        
-        <Button
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
                 android:id="@+id/clearButton"
-                android:layout_width="88dp"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/clear" />
-        
+                android:layout_marginStart="12dip"
+                android:background="@color/colorPrimaryDark"
+                android:text="@string/clear"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+                android:textColor="@color/design_default_color_on_primary"
+                android:textColorHighlight="@android:color/primary_text_dark"
+                android:textColorLink="@android:color/primary_text_dark"
+                android:textCursorDrawable="@android:color/primary_text_dark"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/randomButton"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dip"
+                android:background="@color/colorPrimaryDark"
+                android:text="@string/random"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+                android:textColor="@color/design_default_color_on_primary"
+                android:textColorHighlight="@android:color/primary_text_dark"
+                android:textColorLink="@android:color/primary_text_dark"
+                android:textCursorDrawable="@android:color/primary_text_dark"
+                android:textSize="24sp" />
+
+        </TableRow>
+
         <com.example.flashcards.PaintView
-                android:id="@+id/paintView"
-                android:layout_width="410dp"
-                android:layout_height="fill_parent" />
+            android:id="@+id/paintView"
+            android:layout_width="410dp"
+            android:layout_height="fill_parent" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
